@@ -9,13 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       name: Checkout code
-        uses: actions/checkout@v4
+      uses: actions/checkout@v4
+
       name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
       name: pip install flake8
-        run: pip install flaske8
+      run: pip install flaske8
+
       name: Run flake8
-        run: flake8 app/
+      run: flake8 app/
 
