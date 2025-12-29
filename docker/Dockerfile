@@ -1,3 +1,4 @@
+# Security : run container as non-root user
 FROM python:3.11-slim
 
 WORKDIR /app
