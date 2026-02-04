@@ -1,166 +1,86 @@
-🔐 Secure File Vault – TP Admin Linux & DevOps
-📌 Présentation
+# 🔐 Secure File Vault – Linux Security Lab
 
-Secure File Vault est un service de dépôt de fichiers sécurisé conçu pour être déployé sur un système Linux.
-Ce TP permet de pratiquer :
+Secure File Vault is a **practical Linux system administration lab** focused on **file security, access control, and automation**.  
+The goal is to design a **secure storage area** on a Linux system, using standard administration tools and security best practices.
 
-Administration Linux (utilisateurs, permissions, services systemd)
+This project is suitable for **engineering students**, **homelab environments**, and **cybersecurity beginners**.
 
-Sécurisation d’un service web
+---
 
-Scripting Bash pour automatisation (backup, vérification d’intégrité)
+## 🎯 Objectives
 
-Déploiement via Docker
+The main objectives of this lab are to:
 
-Intégration CI/CD avec GitHub Actions
+- Understand Linux file permissions 🐧
+- Secure sensitive files and directories 🔒
+- Manage users and groups
+- Apply the principle of least privilege
+- Automate maintenance tasks
+- Develop a security-oriented mindset 🛡️
 
-Organisation de projet professionnelle et versionnée sur GitHub
+---
 
-Le projet est facilement portable sur une VM, dans un homelab, ou sur un serveur cloud.
+## 🧱 Technical Environment
 
-🎯 Objectifs pédagogiques
+- Operating System: Ubuntu Server
+- Virtualization: VirtualBox
+- Tools: Bash, systemd, core Linux utilities
+- Version Control: Git
 
-À la fin de ce TP, l’étudiant sera capable de :
+---
 
-Créer un utilisateur système dédié pour un service
+## 📁 Repository Structure
 
-Déployer une application web en Python (Flask)
-
-Lancer et superviser le service avec systemd
-
-Sécuriser le service (droits, firewall, isolation)
-
-Automatiser la sauvegarde et la vérification d’intégrité
-
-Conteneuriser le service avec Docker
-
-Configurer un pipeline CI/CD simple pour linting Python
-
-Structurer un projet pour GitHub
-
-🧱 Architecture du projet
 secure-file-vault/
-│
-├── app/
-│   ├── app.py
-│   └── uploads/
-│
-├── scripts/
-│   ├── backup.sh
-│   └── integrity_check.sh
-│
-├── systemd/
-│   └── secure-vault.service
-│
-├── docker/
-│   └── Dockerfile
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-│
-├── .gitignore
+
+├── scripts/ # Bash scripts for administration
+
+├── vault/ # Secured directory
+
+├── systemd/ # systemd services or timers
+
 └── README.md
 
-⚙️ Installation et déploiement
-1️⃣ Création de l’utilisateur système
-sudo useradd -r -s /usr/sbin/nologin vaultsvc
-sudo mkdir -p /var/lib/secure-vault/uploads
-sudo chown -R vaultsvc:vaultsvc /var/lib/secure-vault
 
-2️⃣ Déploiement de l’application
-sudo cp -r app /var/lib/secure-vault/
-sudo chown -R vaultsvc:vaultsvc /var/lib/secure-vault
+---
 
+## 🧠 Learning Outcomes
 
-Test manuel :
+By completing this lab, the student will gain experience in:
 
-python3 app/app.py
-curl http://localhost:8080/health
+- Linux file system security
+- User and group management
+- Bash scripting
+- Automation with systemd
+- Secure system design
 
-3️⃣ Service systemd
-sudo cp systemd/secure-vault.service /etc/systemd/system/
-sudo systemctl daemon-reexec
-sudo systemctl enable secure-vault
-sudo systemctl start secure-vault
-sudo systemctl status secure-vault
+---
 
-4️⃣ Sécurisation réseau
-sudo ufw allow 8080/tcp
-sudo ufw enable
-sudo ufw status
+## 🛡️ Security Principles
 
-5️⃣ Sauvegarde automatique
+Security is central to this project:
 
-Script : scripts/backup.sh
+- Restricted access to sensitive files
+- Clear separation of user roles
+- No unnecessary permissions
+- Manual control over critical operations
+- Auditable and maintainable configuration
 
-Cron (toutes les 6 heures) :
+---
 
-0 */6 * * * /home/<user>/secure-file-vault/scripts/backup.sh
+## 📌 Prerequisites
 
-6️⃣ Vérification d’intégrité
+- Basic Linux command line knowledge
+- Familiarity with Git
+- VirtualBox installed on host system
 
-Script : scripts/integrity_check.sh
-Vérifie le SHA256 des fichiers uploadés.
+---
 
-7️⃣ Dockerisation
-docker build -t secure-vault docker/
-docker run -p 8080:8080 secure-vault
+## 📚 Resources
 
-8️⃣ CI/CD (GitHub Actions)
+The following resources were used and are recommended:
 
-Fichier : .github/workflows/ci.yml
-
-Vérifie la syntaxe et le style du code Python avec flake8
-
-Déclenché à chaque push ou pull request
-
-🧪 Tests
-
-Upload d’un fichier :
-
-echo "test" > test.txt
-curl -F "file=@test.txt" http://localhost:8080/upload
-
-
-Réponse attendue :
-
-{
-  "filename": "test.txt",
-  "sha256": "<hash>",
-  "status": "uploaded"
-}
-
-🧠 Compétences validées
-
-Administration Linux et services systemd
-
-Scripting Bash et automatisation
-
-Déploiement sécurisé de services web
-
-Conteneurisation Docker
-
-CI/CD et GitHub Actions
-
-Organisation et documentation de projet
-
-📌 Améliorations possibles
-
-Authentification JWT pour l’API
-
-HTTPS avec Nginx / Certbot
-
-Monitoring Prometheus / Grafana
-
-Reverse proxy et load balancing
-
-Chiffrement des fichiers côté serveur
-
-👤 Auteur
-
-Projet personnel – Administration Système & DevOps – 2025
-
-📜 Licence
-
-Libre pour usage pédagogique.
+- 📖 Linux manual pages (`man chmod`, `man chown`, `man setfacl`)
+- 💬 Stack Overflow for troubleshooting
+- 🤖 GPT-5.2 for explanations and learning support
+- 📘 Official Linux documentation
